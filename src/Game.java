@@ -26,6 +26,13 @@ public class Game {
         }
     }
 
+    public void printHands() {
+        for (Player player : players) {
+            System.out.println(player.name + "'s hand");
+            player.printHand();
+        }
+    }
+
     public Game(String player1Name, String player2Name, String player3Name, String player4Name, int startingHandSize) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
