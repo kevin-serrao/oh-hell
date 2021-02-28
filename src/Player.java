@@ -1,18 +1,21 @@
-import java.util.ArrayList;
+
 
 public class Player {
     String name;
     char position;
-    ArrayList<Card> hand = new ArrayList<>();
-
-    public void printHand() {
-        for (Card card : this.hand) {
-            card.printShortCard();
-        }
-    }
+    Hand hand = new Hand();
 
     public Player(String name, char position) {
         this.name = name;
         this.position = position;
+    }
+
+    public void printHand () {
+        System.out.println(name + "'s hand");
+        hand.printHand();
+    }
+
+    public void addCardToHand(Card card) {
+        this.hand.cards.add(card);
     }
 }

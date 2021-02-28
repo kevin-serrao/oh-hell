@@ -2,45 +2,41 @@ import java.util.LinkedList;
 
 public class Game {
     Deck deck = new Deck();
-    String player1Name;
-    String player2Name;
-    String player3Name;
-    String player4Name;
     LinkedList<Player> players = new LinkedList<>();
     int startingHandSize;
     int currentHandSize;
 
-
-    public void addPlayers() {
-        players.add(new Player(player1Name, 'N'));
-        players.add(new Player(player2Name, 'E'));
-        players.add(new Player(player3Name, 'S'));
-        players.add(new Player(player4Name, 'W'));
-    }
-
-    public void dealCards(Deck deck, int currentHandSize) {
+    public void dealCards() {
         for (Player player : players) {
             for (int j = 0; j < currentHandSize; j ++) {
-                player.hand.add(deck.cards.poll());
+                player.addCardToHand(deck.cards.poll());
             }
+        }
+    }
+
+    public void sortHands() {
+        for (Player player: players) {
+            player.hand.sort();
         }
     }
 
     public void printHands() {
         for (Player player : players) {
-            System.out.println(player.name + "'s hand");
             player.printHand();
         }
     }
 
     public Game(String player1Name, String player2Name, String player3Name, String player4Name, int startingHandSize) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
-        this.player3Name = player3Name;
-        this.player4Name = player4Name;
+        players.add(new Player(player1Name, 'N'));
+        players.add(new Player(player2Name, 'E'));
+        players.add(new Player(player3Name, 'S'));
+        players.add(new Player(player4Name, 'W'));
         this.startingHandSize = startingHandSize;
         this.currentHandSize = startingHandSize;
-        addPlayers();
+        deck.addDeckToCardsList();
         deck.shuffle();
+        dealCards();
+        sortHands();
+        printHands();
     }
 }
